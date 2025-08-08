@@ -51,10 +51,13 @@ app.use(express.json());
 app.use("/api/styles", hijabRoutes); // 👈 /api/styles se hit hoga
 app.use('/auth',AuthRouter )
 
-mongoose.connect(process.env.MongoConnect)
-  .then(() => console.log("✅ MongoDB connected"))
-  .catch(err => console.error(err));
-
+mongoose.connect(process.env.MongoConnect, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000
+})
+.then(() => console.log("✅ MongoDB connected"))
+.catch(err => console.error("MongoDB connection error:", err));
   // / const Port = process.env.PORT;
 app.get('/', (req,res)=>{
   res.send("settttttttUpppppppp")
